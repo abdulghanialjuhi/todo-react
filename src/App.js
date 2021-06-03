@@ -11,7 +11,6 @@ import Footer from "./component/Footer";
 class App extends Component {
   state = {
     Todo: [],
-
     cat: {
       showAll: true,
       showActive: false,
@@ -36,8 +35,8 @@ class App extends Component {
     });
   };
 
-  removeTodo = (id) => {
-    this.setState({
+  removeTodo = async (id) => {
+    await this.setState({
       Todo: [...this.state.Todo.filter((todo) => todo.id !== id)],
     });
   };
@@ -52,28 +51,20 @@ class App extends Component {
         isCompleted: false,
       };
       this.setState({ Todo: [...this.state.Todo, newTodo] });
-      //   const json = JSON.stringify(newTodo);
-      // const xml = new XMLHttpRequest();
-      // xml.open("POST", "json.json", true);
-      // xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      // const params = "name:" + newTodo;
-      // console.log(params);
-      // xml.send(params);
     }
   };
 
   componentDidUpdate = () => {
-    const { cat } = this.state;
+    const { cat, Todo } = this.state;
     localStorage.setItem("cat1", JSON.stringify(cat));
-
-    const { Todo } = this.state;
-
     localStorage.setItem("todos", JSON.stringify(Todo));
   };
 
   componentDidMount() {
     const cat1 = JSON.parse(localStorage.getItem("cat1"));
-    this.setState({ cat: { ...cat1 } });
+    if (cat1) {
+      this.setState({ cat: { ...cat1 } });
+    }
 
     const local = JSON.parse(localStorage.getItem("todos"));
 
