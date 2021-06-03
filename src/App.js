@@ -1,6 +1,11 @@
 import "./App.css";
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import Header from "./component/header";
 import Todo from "./component/Todo";
 import AddForm from "./component/addForm";
@@ -137,35 +142,39 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
-          <Header />
-          <div className="container">
-            <Route
-              exact
-              path="/"
-              render={(props) => (
-                <React.Fragment>
-                  <AddForm addTodo={this.addTodo} />
-                  <ShowCat
-                    todo={this.state.Todo}
-                    Active={this.state}
-                    showAll={this.showAll}
-                    showActive={this.showActive}
-                    showCompleted={this.showCompleted}
-                  />
-                  <ul className="todos">
-                    <Todo
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={(props) => (
+              <React.Fragment>
+                <div className="App">
+                  <Header />
+                  <div className="container">
+                    <AddForm addTodo={this.addTodo} />
+
+                    <ShowCat
                       todo={this.state.Todo}
-                      markComplete={this.markComplete}
-                      removeTodo={this.removeTodo}
+                      Active={this.state}
+                      showAll={this.showAll}
+                      showActive={this.showActive}
+                      showCompleted={this.showCompleted}
                     />
-                  </ul>
-                </React.Fragment>
-              )}
-            />
-          </div>
-          <Footer />
-        </div>
+                    <ul className="todos">
+                      <Todo
+                        todo={this.state.Todo}
+                        markComplete={this.markComplete}
+                        removeTodo={this.removeTodo}
+                      />
+                    </ul>
+                  </div>
+                  <Footer />
+                </div>
+              </React.Fragment>
+            )}
+          />
+          <Route path="*" render={() => <Redirect to="/" />} />
+        </Switch>
       </Router>
     );
   }

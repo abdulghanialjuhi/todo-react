@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  height: 100vh;
 }
 
 .App-logo {
@@ -47,6 +47,11 @@ body {
   }
 }
 
+header {
+  width: 60%;
+  margin: auto;
+}
+
 .header {
   color: rgb(186, 142, 228);
   font-size: 8rem;
@@ -57,15 +62,15 @@ body {
 .container {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   margin: auto;
-  width: 740px;
+  width: 60%;
   max-width: 100%;
+  min-width: 350px;
 }
 
 form {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   margin: auto;
-  width: 740px;
-  max-width: 100%;
+  width: 100%;
 }
 
 .input {
@@ -73,7 +78,8 @@ form {
   border-left: none;
   border-right: none;
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 1rem;
+  align-items: center;
   font-size: 2rem;
   display: block;
 }
@@ -87,6 +93,7 @@ form {
   padding: 0;
   margin: 0;
   list-style-type: none;
+  width: 100%;
 }
 
 .todos li {
@@ -102,6 +109,7 @@ form {
   text-align: center;
   padding: 14px 5px;
   background-color: rgb(252, 252, 252);
+  width: 100%;
 }
 
 button:hover {
@@ -158,4 +166,27 @@ button:focus {
 .completed {
   text-decoration: line-through;
   color: rgb(189, 184, 184);
+}
+
+@media (max-width: 700px) {
+  .header {
+    font-size: 5rem;
+  }
+  .input::placeholder {
+    color: #b5b5b5;
+    font-size: 1rem;
+  }
+
+  .input {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .App {
+    align-items: center;
+  }
+  .header {
+    font-size: 3rem;
+  }
 }
